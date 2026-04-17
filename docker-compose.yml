@@ -1,12 +1,22 @@
 services:
   backend:
-    build: ./backend
+    image: ghcr.io/aribilgiogr/proje-backend:latest
     ports:
       - "8000:8000"
-  
+    networks:
+      - proje
+    restart: always
+
   frontend:
-    build: ./frontend
+    image: ghcr.io/aribilgiogr/proje-frontend:latest
     ports:
       - "5173:5173"
     depends_on:
       - backend
+    networks:
+      - proje
+    restart: always
+
+networks:
+  proje:
+    driver: bridge
